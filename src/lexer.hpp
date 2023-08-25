@@ -7,6 +7,7 @@ namespace lexer {
 enum TokenType {
     TT_EOF = -1,
     TT_Generic,
+    TT_Comment,
 
     TT_Fn,
     TT_Return,

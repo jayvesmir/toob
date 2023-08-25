@@ -7,7 +7,6 @@
     Token { _pos++, type, view(1) }
 
 lexer::Token lexer::getToken(const std::string& _src, int64_t& _pos) {
-
     for (; (uint64_t)_pos < _src.size(); _pos++) {
         switch (_src[_pos]) {
         case ' ':
@@ -21,12 +20,35 @@ lexer::Token lexer::getToken(const std::string& _src, int64_t& _pos) {
             return shortToken(TT_Newline);
 
         case '+':
+            if (std::isdigit(_src.at(++_pos))) {
+                int64_t len     = 2;
+                int64_t lastPos = _pos - 1;
+                while (std::isdigit(_src.at(++_pos)) || _src[_pos] == '.')
+                    len++;
+                return Token{lastPos++, TT_NumberLiteral,
+                             posview(lastPos, len)};
+            }
             return shortToken(TT_Plus);
         case '-':
+            if (std::isdigit(_src.at(++_pos))) {
+                int64_t len     = 2;
+                int64_t lastPos = _pos - 1;
+                while (std::isdigit(_src.at(++_pos)) || _src[_pos] == '.')
+                    len++;
+                return Token{lastPos++, TT_NumberLiteral,
+                             posview(lastPos, len)};
+            }
             return shortToken(TT_Minus);
         case '*':
             return shortToken(TT_Star);
         case '/':
+            if (_src.at(++_pos) == '/') {
+                int64_t len     = 2;
+                int64_t lastPos = _pos - 1;
+                while (_src.at(++_pos) != '\n')
+                    len++;
+                return Token{lastPos++, TT_Comment, posview(lastPos, len)};
+            }
             return shortToken(TT_Slash);
         case '=':
             return shortToken(TT_Equals);
@@ -64,7 +86,7 @@ lexer::Token lexer::getToken(const std::string& _src, int64_t& _pos) {
         if (std::isdigit(_src[_pos])) {
             int64_t len     = 1;
             int64_t lastPos = _pos;
-            while (std::isdigit(_src.at(++_pos)))
+            while (std::isdigit(_src.at(++_pos)) || _src[_pos] == '.')
                 len++;
             return Token{lastPos++, TT_NumberLiteral, posview(lastPos, len)};
         }

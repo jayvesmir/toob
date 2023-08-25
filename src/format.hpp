@@ -11,6 +11,7 @@ template <> struct std::formatter<lexer::TokenType> {
         tokenTypeStrings = {
             {lexer::TT_EOF, "EOF"},
             {lexer::TT_Generic, "generic"},
+            {lexer::TT_Comment, "comment"},
             {lexer::TT_Fn, "function declaration"},
             {lexer::TT_Return, "return statement"},
             {lexer::TT_Newline, "newline"},

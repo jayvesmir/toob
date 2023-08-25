@@ -1,9 +1,10 @@
+// adds x and y
 fn foo(x [i64], y [i64]) [i64] {
     return x + y;
 }
 
 fn bar(a [i64]) [i64] {
-    b [i64] = 12;
-    c [u32] = 94;
+    b [i64] = -12;
+    c [u32] = 2;
     return foo(a, b) * c;
 }
