@@ -19,7 +19,7 @@ int32_t main(int argc, char** argv) {
         std::string fileContents = file::readEntire(args[1]);
         parser::generateParseTree(fileContents);
     } catch (const std::exception& e) {
-        std::cout << std::format("[exception] {}\n", e.what());
+        std::cout << std::format("[error] {}\n", e.what());
         return -1;
     }
 

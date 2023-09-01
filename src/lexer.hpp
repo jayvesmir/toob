@@ -36,6 +36,8 @@ namespace lexer {
         int64_t pos              = -1;
         TokenType type           = TT_EOF;
         std::string_view content = "";
+
+        bool isOperator() const;
     };
 
     static const std::unordered_map<std::string_view, TokenType> keywords = {
