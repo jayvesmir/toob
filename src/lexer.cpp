@@ -90,6 +90,9 @@ lexer::Token lexer::getToken(const std::string& _src, int64_t& _pos) {
                 len++;
             return Token{lastPos++, TT_NumberLiteral, posview(lastPos, len)};
         }
+
+        throw std::runtime_error(
+            std::format("unexpected '{}' at {}", _src[_pos], _pos));
     }
 
     return Token{};
