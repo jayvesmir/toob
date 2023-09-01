@@ -2,8 +2,8 @@
 #include <cctype>
 
 #define posview(pos, len) std::string_view(_src.data() + pos - 1, len)
-#define view(len) posview(_pos, len)
-#define shortToken(type)                                                       \
+#define view(len)         posview(_pos, len)
+#define shortToken(type) \
     Token { _pos++, type, view(1) }
 
 lexer::Token lexer::getToken(const std::string& _src, int64_t& _pos) {

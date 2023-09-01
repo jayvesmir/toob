@@ -4,11 +4,11 @@
 #include <format>
 #include <iostream>
 
-#define unexpected(token)                                                      \
-    throw std::runtime_error(                                                  \
+#define unexpected(token)     \
+    throw std::runtime_error( \
         std::format("unexpected '{}' at {}", token.content, token.pos))
-#define expectToken(token, tokenType)                                          \
-    if (token.type != tokenType)                                               \
+#define expectToken(token, tokenType) \
+    if (token.type != tokenType)      \
     unexpected(token)
 
 static utils::CircularQueue<lexer::Token, 24> tokenBuf;
